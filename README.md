@@ -1,19 +1,18 @@
-<h1 align="center"><img src="./assets/logo.png" width="130" /> Website</h1>
-
-<br/>
+# ![Mineplex Logo](./assets/logo.png) Website
 
 This repository contains unofficial source code of Mineplex website.
-The project is splitted on two parts `backend` & `frontend`
+The project started as for fun project & is separate on two parts `backend` & `frontend`
 
 ### Contains
 
 ##### Backend
-- Quarkus
-- GraphQL
+- PostgreSQL - The SQL database
+- Quarkus - Java Framework
+- GraphQL - Technology from Meta
 
 ##### Frontend
-- NextJS
-- TailwindCSS
+- NextJS - NodeJS Framework for React
+- TailwindCSS - The NodeJS module for design
 
 -----
 
