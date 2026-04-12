@@ -1,0 +1,11 @@
+type Query {
+
+    players: MineplexPlayersData
+
+    games: [MineplexGame]
+    gameById(id: ID!): MineplexGame
+
+    accountByName(name: String!): MineplexAccount
+    accountById(id: ID!): MineplexAccount
+
+}

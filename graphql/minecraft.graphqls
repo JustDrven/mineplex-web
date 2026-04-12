@@ -1,0 +1,11 @@
+type MineplexPlayersData {
+    online: Int
+    max: Int
+}
+
+type MineplexGame {
+    id: ID!
+    image: String
+    name: String
+
+}
