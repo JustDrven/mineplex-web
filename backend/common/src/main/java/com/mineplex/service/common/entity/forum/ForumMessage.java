@@ -28,9 +28,7 @@ public class ForumMessage {
     @JoinColumn(name = "forum_id")
     private Forum forum;
 
-    @ManyToMany
-    @JoinColumn(name = "sender_id")
-    @Column(nullable = false)
+    @ManyToOne
     private Account sender;
 
     @Column(nullable = false)

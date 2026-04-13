@@ -25,6 +25,15 @@
             <artifactId>quarkus-jpastreamer</artifactId>
             <version>3.0.3.Final</version>
         </dependency>
+
+
+
+        <dependency>
+            <groupId>io.quarkus</groupId>
+            <artifactId>quarkus-jdbc-postgresql</artifactId>
+            <version>3.34.3</version>
+        </dependency>
+
     </dependencies>
 
 
