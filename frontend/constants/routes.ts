@@ -4,6 +4,7 @@ export const ROUTES = {
     FORUMS: "/forums",
     GAMES: "/games",
     APPLICATIONS: "/applications",
+    CHANGELOG: "/changelog",
     STAFF: "/staff",
     CONTACT: "/contact"
 }

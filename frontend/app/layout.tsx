@@ -15,7 +15,10 @@ const roboto = Roboto({
 })
 
 export const metadata: Metadata = {
-  title: "Home | Mineplex",
+  title: {
+    default: "Home | Mineplex",
+    template: "%s | Mineplex",
+  },
   description: "Mineplex is the largest Minecraft minigame server network in the world, with over 1 million unique players each month. We offer a wide variety of minigames, including classic favorites like Survival Games and SkyWars, as well as new and innovative games that you won't find anywhere else. Join us today and experience the fun and excitement of Mineplex!",
 };
 

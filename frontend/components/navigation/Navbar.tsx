@@ -6,6 +6,7 @@ import { gsap } from "gsap"
 import { toast } from "sonner"
 import { navLinks } from "@/constants/navLinks"
 import Link from "next/link"
+import { usePathname } from "next/navigation"
 
 const LAYERS = [
   { src: "/images/headers/layer-0.png", alt: "layer 0" },
@@ -18,14 +19,13 @@ const LAYERS = [
 const MAX_MOVE = 40
 
 const copyText = (text: string) => {
-  navigator.clipboard.writeText(text).then(() => {
-    toast.info("IP copied to clipboard!");
-  }).catch((err) => {
-    toast.error("Failed to copy IP: ", err);
-  })
+  navigator.clipboard.writeText(text)
+  toast.info("IP copied to clipboard!")
 }
 
 const Navbar = () => {
+  const pathname = usePathname();
+
   const containerRef = useRef<HTMLDivElement>(null)
   const layerRefs = useRef<(HTMLDivElement | null)[]>([])
 
@@ -96,7 +96,7 @@ const Navbar = () => {
 
       <div className="bg-neutral-800 border-b-4 border-b-neutral-700 py-2 text-white text-center text-[24px] uppercase flex items-center justify-center gap-12">
         {navLinks.map((link, idx) => (
-          <Link href={link.route} key={idx} className="transition-colors duration-200 hover:text-amber-400">
+          <Link href={link.route} key={idx} className={`${pathname === link.route && "text-amber-400"} transition-colors duration-200 hover:text-amber-400`}>
             {link.label}
           </Link>
         ))}

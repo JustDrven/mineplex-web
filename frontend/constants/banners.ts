@@ -8,7 +8,7 @@ export const bannersList = [
         button: {
             label: "Play Now!",
             target: "_self",
-            route: ROUTES.HOME,
+            route: ROUTES.PLAY,
         }
     },
     {

@@ -2,6 +2,10 @@
 @import "tw-animate-css";
 @import "shadcn/tailwind.css";
 
+@utility link-tertiary {
+  @apply transition-colors duration-200 hover:text-amber-600;
+}
+
 @theme {
   --font-oswald: "Oswald", sans-serif;
   --font-roboto: "Roboto", sans-serif;
