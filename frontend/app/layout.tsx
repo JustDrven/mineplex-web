@@ -1,18 +1,18 @@
 import type { Metadata } from "next";
-import { Inter, Oswald } from "next/font/google";
+import { Oswald, Roboto } from "next/font/google";
 import "./globals.css";
 import { cn } from "@/lib/utils";
 import { Toaster } from "sonner";
-
-const inter = Inter({
-  variable:'--font-inter',
-  subsets: ['latin']
-});
 
 const oswald = Oswald({
   variable: "--font-oswald",
   subsets: ["latin"],
 });
+
+const roboto = Roboto({
+  variable: "--font-roboto",
+  subsets: ["latin"]
+})
 
 export const metadata: Metadata = {
   title: "Home | Mineplex",
@@ -21,7 +21,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en" className={cn("h-full", "antialiased", oswald.className, inter.className)}>
+    <html lang="en" className={cn("h-full", "antialiased", oswald.className, roboto.variable)}>
       <body className="min-h-full flex flex-col">
         <Toaster />
 

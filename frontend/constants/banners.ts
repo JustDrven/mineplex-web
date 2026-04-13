@@ -18,7 +18,7 @@ export const bannersList = [
         button: {
             label: "Visit the Forums!",
             target: "_self",
-            route: ROUTES.HOME,
+            route: ROUTES.FORUMS,
         }
     },
     {
