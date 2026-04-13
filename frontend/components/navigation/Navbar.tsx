@@ -1,0 +1,108 @@
+"use client"
+
+import { useRef } from "react"
+import Image from "next/image"
+import { gsap } from "gsap"
+import { toast } from "sonner"
+import { navLinks } from "@/constants/navLinks"
+import Link from "next/link"
+
+const LAYERS = [
+  { src: "/images/headers/layer-0.png", alt: "layer 0" },
+  { src: "/images/headers/layer-1.png", alt: "layer 1" },
+  { src: "/images/headers/layer-2.png", alt: "layer 2" },
+  { src: "/images/headers/layer-3.png", alt: "layer 3" },
+  { src: "/images/headers/layer-4.png", alt: "layer 4" },
+]
+
+const MAX_MOVE = 40
+
+const copyText = (text: string) => {
+  navigator.clipboard.writeText(text).then(() => {
+    toast.info("IP copied to clipboard!");
+  }).catch((err) => {
+    toast.error("Failed to copy IP: ", err);
+  })
+}
+
+const Navbar = () => {
+  const containerRef = useRef<HTMLDivElement>(null)
+  const layerRefs = useRef<(HTMLDivElement | null)[]>([])
+
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    const rect = containerRef.current?.getBoundingClientRect()
+    if (!rect) return
+
+    const cx = rect.left + rect.width / 2
+    const cy = rect.top + rect.height / 2
+
+    const dx = (e.clientX - cx) / (rect.width / 2)
+    const dy = (e.clientY - cy) / (rect.height / 2)
+
+    layerRefs.current.forEach((el, i) => {
+      if (!el) return
+
+      const factor = (i / LAYERS.length * 2) * MAX_MOVE
+
+      gsap.to(el, {
+        x: dx * factor,
+        y: dy * factor * 0.4 / 10,
+
+        duration: 0.6,
+        ease: "power2.out",
+      })
+    })
+  }
+
+  const handleMouseLeave = () => {
+    layerRefs.current.forEach((el) => {
+      if (!el) return
+      gsap.to(el, {
+        x: 0,
+        y: 0,
+        duration: 0.8,
+        ease: "elastic.out(1, 0.6)",
+      })
+    })
+  }
+
+  return (
+    <nav className="relative w-full">
+      <div ref={containerRef} onMouseMove={handleMouseMove} onMouseLeave={handleMouseLeave} className="relative w-full aspect-video overflow-hidden max-h-62">
+        {LAYERS.map((layer, i) => (
+          <div key={layer.src} ref={(el) => { layerRefs.current[i] = el }} className="absolute inset-0 will-change-transform">
+            <Image src={layer.src} alt={layer.alt} fill draggable={false} className="object-cover" priority />
+          </div>
+        ))}
+
+        <div className="absolute inset-0 flex items-center justify-center z-10 -translate-y-3">
+          <Image src="/images/logo.png" alt="logo" height={80} width={520} draggable={false} className="object-contain" priority />
+        </div>
+
+        <div className="absolute bottom-0 left-0 right-0 z-20 bg-slate-950/50 text-white text-center text-[21px] flex items-center justify-center gap-7">
+          <button onClick={() => copyText("us.mineplex.com")} className="text-amber-500 cursor-pointer transition-colors duration-300 hover:text-amber-300">
+            US.MINEPLEX.COM
+          </button>
+
+          <h1 className="text-amber-300">
+            10000 PLAYERS ONLINE
+          </h1>
+
+          <button onClick={() => copyText("pe.mineplex.com")} className="text-amber-500 cursor-pointer transition-colors duration-300 hover:text-amber-300">
+            PE.MINEPLEX.COM
+          </button>
+        </div>
+      </div>
+
+      <div className="bg-neutral-800 border-b-4 border-b-neutral-700 py-2 text-white text-center text-[24px] uppercase flex items-center justify-center gap-12">
+        {navLinks.map((link, idx) => (
+          <Link href={link.route} key={idx} className="transition-colors duration-200 hover:text-amber-400">
+            {link.label}
+          </Link>
+        ))}
+      </div>
+    </nav>
+  )
+}
+
+export default Navbar
