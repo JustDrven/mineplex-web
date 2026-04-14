@@ -29,7 +29,7 @@ public class Game {
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    public Environment environment;
+    private Environment environment;
 
     public Game() {
     }
@@ -37,18 +37,6 @@ public class Game {
     public Game(String name, String displayName, Environment environment) {
         this.name = name;
         this.displayName = displayName;
-        this.environment = environment;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public void setDisplayName(String displayName) {
-        this.displayName = displayName;
-    }
-
-    public void setEnvironment(Environment environment) {
         this.environment = environment;
     }
 
@@ -60,11 +48,24 @@ public class Game {
         return name;
     }
 
+    public void setName(String name) {
+        this.name = name;
+    }
+
     public String getDisplayName() {
         return displayName;
+    }
+
+    public void setDisplayName(String displayName) {
+        this.displayName = displayName;
     }
 
     public Environment getEnvironment() {
         return environment;
     }
+
+    public void setEnvironment(Environment environment) {
+        this.environment = environment;
+    }
+
 }

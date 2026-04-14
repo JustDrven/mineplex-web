@@ -1,4 +1,4 @@
 type MineplexAccount {
-    id: ID
+    id: Int
     name: String
 }

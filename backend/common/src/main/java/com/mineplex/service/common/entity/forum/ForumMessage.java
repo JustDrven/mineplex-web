@@ -8,7 +8,6 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
@@ -28,9 +27,7 @@ public class ForumMessage {
     @JoinColumn(name = "forum_id")
     private Forum forum;
 
-    @ManyToMany
-    @JoinColumn(name = "sender_id")
-    @Column(nullable = false)
+    @ManyToOne
     private Account sender;
 
     @Column(nullable = false)
@@ -49,10 +46,6 @@ public class ForumMessage {
         sentAt = new Date();
     }
 
-    public void setMessage(String message) {
-        this.message = message;
-    }
-
     public long getId() {
         return id;
     }
@@ -67,6 +60,10 @@ public class ForumMessage {
 
     public String getMessage() {
         return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
     }
 
     public Date getSentAt() {

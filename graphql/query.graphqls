@@ -6,6 +6,6 @@ type Query {
     gameById(id: ID!): MineplexGame
 
     accountByName(name: String!): MineplexAccount
-    accountById(id: ID!): MineplexAccount
+    accountById(id: Int!): MineplexAccount
 
 }
