@@ -1,20 +1,19 @@
 package com.mineplex.service.minecraft.service;
 //
+
+import com.mineplex.service.common.data.MineplexPlayersData;
+import com.mineplex.service.common.util.CacheObject;
+
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
-import com.mineplex.service.common.data.MineplexPlayersData;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
-import com.mineplex.service.common.util.CacheObject;
-
-import io.vertx.mutiny.core.http.HttpHeaders;
 import jakarta.enterprise.context.ApplicationScoped;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.time.Duration;
 import java.util.Optional;

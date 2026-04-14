@@ -7,5 +7,6 @@ type MineplexGame {
     id: ID!
     image: String
     name: String
+    environment: String
 
 }

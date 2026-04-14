@@ -6,8 +6,8 @@ import java.util.Optional;
 
 public final class CacheObject<T> {
 
-    private T value = null;
     private final Duration duration;
+    private T value = null;
     private Instant lastUpdate = null;
 
     public CacheObject(Duration duration) {

@@ -4,6 +4,9 @@ public enum Environment {
 
     RELEASED,
     CLOSED,
-    IN_DEVELOPMENT
+    IN_DEVELOPMENT;
 
+    public boolean isPublic() {
+        return equals(RELEASED);
+    }
 }

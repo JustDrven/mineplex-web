@@ -1,23 +1,31 @@
 package com.mineplex.service.minecraft.resource;
 
+import com.mineplex.service.common.data.MineplexGame;
 import com.mineplex.service.common.data.MineplexPlayersData;
+import com.mineplex.service.minecraft.service.GamesService;
 import com.mineplex.service.minecraft.service.PlayersService;
-
-import jakarta.inject.Inject;
 
 import org.eclipse.microprofile.graphql.GraphQLApi;
 import org.eclipse.microprofile.graphql.Query;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import jakarta.inject.Inject;
+
+import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
+
 @GraphQLApi
-public class QueryResource {
+public class MinecraftResource {
 
     private static final MineplexPlayersData EMPTY_DATA = new MineplexPlayersData(-1, -1);
-    private static final Logger log = LoggerFactory.getLogger(QueryResource.class);
+    private static final Logger log = LoggerFactory.getLogger(MinecraftResource.class);
 
     @Inject
     private PlayersService playersService;
+    @Inject
+    private GamesService gamesService;
 
     @Query("players")
     public MineplexPlayersData getPlayers() {
@@ -29,6 +37,18 @@ public class QueryResource {
             return EMPTY_DATA;
         }
 
+    }
+
+    @Query("games")
+    public List<MineplexGame> getGames() {
+        return gamesService.getGames();
+    }
+
+    @Query("gameById")
+    public MineplexGame getGamesByID(String id) {
+        Optional<MineplexGame> gameOptional = gamesService.getGameByID(UUID.fromString(id));
+
+        return gameOptional.orElseGet(null);
     }
 
 }

@@ -1,8 +1,7 @@
 package com.mineplex.service.common.data;
 
-import java.util.UUID;
-
-public record MineplexGame(UUID id,
+public record MineplexGame(String id,
                            String image,
-                           String name) {
+                           String name,
+                           String environment) {
 }
