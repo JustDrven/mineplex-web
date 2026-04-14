@@ -1,16 +1,9 @@
 import { footerLinks } from "@/constants/footerLinks"
 import { ROUTES } from "@/constants/routes"
 import { socialsList } from "@/constants/socials"
+import { ColorUtil } from "@/utils/ColorUtil"
 import Image from "next/image"
 import Link from "next/link"
-
-const socialsColors: { [key: string]: string } = {
-  "black": "hover:bg-black",
-  "blue-600": "hover:bg-blue-600",
-  "blue-500": "hover:bg-blue-500",
-  "fuchsia-500": "hover:bg-fuchsia-500",
-  "red-500": "hover:bg-red-500",
-};
 
 const Footer = () => {
   return (
@@ -21,7 +14,7 @@ const Footer = () => {
 
       <div className="bg-[#262326] pb-5 px-[36vh] space-y-16">
         <div className="flex items-start justify-between">
-          <Link href={ROUTES.HOME}>
+          <Link href={ROUTES.HOME} className="link-icon">
             <Image src="/icons/icon.png" alt="Mineplex" height={72} width={72} />
           </Link>
 
@@ -55,7 +48,7 @@ const Footer = () => {
                 const Icon = social.icon
 
                 return (
-                  <Link href={social.href} key={idx} className={`${socialsColors[social.color]} bg-neutral-700 h-9 w-9 text-neutral-300 flex items-center justify-center rounded-t-sm rounded-b-lg transition-colors hover:text-white`}>
+                  <Link href={social.href} target="_blank" key={idx} className={`${ColorUtil.getSocialColor[social.color]} bg-neutral-700 h-9 w-9 text-neutral-300 flex items-center justify-center rounded-t-sm rounded-b-lg transition-colors hover:text-white`}>
                     <Icon size={26} />
                   </Link>
                 )

@@ -6,8 +6,8 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
     <>
       <Navbar />
 
-      <div className="relative min-h-screen space-y-22 overflow-hidden before:absolute before:inset-0 before:bg-[url('/images/background.png')] before:bg-repeat before:bg-size-[auto_40%] before:-z-10">
-        <div>
+      <div className="relative flex min-h-screen flex-col overflow-hidden space-y-22 before:absolute before:inset-0 before:bg-[url('/images/background.png')] before:bg-repeat before:bg-size-[auto_40%] before:-z-10">
+        <div className="flex-1">
           {children}
         </div>
 

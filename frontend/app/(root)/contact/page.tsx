@@ -34,6 +34,10 @@ const Page = () => {
           </ul>
         </div>
       ))}
+
+      <b>
+        Couldn&apos;t find the contact information you were looking for? Please reach out to us with your inquiry at <Link href="mailto:support@mineplex.com" target="_blank" className="link-tertiary">support@mineplex.com</Link>.
+      </b>
     </PageContainer>
   )
 }

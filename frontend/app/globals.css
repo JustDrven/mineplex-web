@@ -6,6 +6,10 @@
   @apply transition-colors duration-200 hover:text-amber-600;
 }
 
+@utility link-icon {
+  @apply transition-all duration-200 hover:scale-105;
+}
+
 @theme {
   --font-oswald: "Oswald", sans-serif;
   --font-roboto: "Roboto", sans-serif;

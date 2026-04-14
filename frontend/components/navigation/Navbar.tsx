@@ -1,12 +1,13 @@
 "use client"
 
-import { useRef } from "react"
+import { useRef, useEffect } from "react"
 import Image from "next/image"
 import { gsap } from "gsap"
 import { toast } from "sonner"
 import { navLinks } from "@/constants/navLinks"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
+import { ROUTES } from "@/constants/routes"
 
 const LAYERS = [
   { src: "/images/headers/layer-0.png", alt: "layer 0" },
@@ -24,10 +25,46 @@ const copyText = (text: string) => {
 }
 
 const Navbar = () => {
-  const pathname = usePathname();
+  const pathname = usePathname()
 
   const containerRef = useRef<HTMLDivElement>(null)
   const layerRefs = useRef<(HTMLDivElement | null)[]>([])
+  const sentinelRef = useRef<HTMLDivElement>(null)
+  const stickyNavRef = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    const sentinel = sentinelRef.current
+    const stickyNav = stickyNavRef.current
+
+    if (!sentinel || !stickyNav) return
+
+    gsap.set(stickyNav, { y: "-100%" })
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        gsap.killTweensOf(stickyNav)
+
+        if (!entry.isIntersecting) {
+          gsap.to(stickyNav, {
+            y: "0%",
+            duration: 0.4,
+            ease: "power3.out"
+          })
+        } else {
+          gsap.to(stickyNav, {
+            y: "-100%",
+            duration: 0.15,
+            ease: "power4.in",
+            overwrite: true
+          })
+        }
+      },
+      { threshold: 0 }
+    )
+
+    observer.observe(sentinel)
+    return () => observer.disconnect()
+  }, [])
 
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
     const rect = containerRef.current?.getBoundingClientRect()
@@ -47,7 +84,6 @@ const Navbar = () => {
       gsap.to(el, {
         x: dx * factor,
         y: dy * factor * 0.4 / 10,
-
         duration: 0.6,
         ease: "power2.out",
       })
@@ -68,7 +104,7 @@ const Navbar = () => {
 
   return (
     <nav className="relative w-full">
-      <div ref={containerRef} onMouseMove={handleMouseMove} onMouseLeave={handleMouseLeave} className="relative w-full aspect-video overflow-hidden max-h-62">
+      <div ref={containerRef} onMouseMove={handleMouseMove} onMouseLeave={handleMouseLeave} className="relative w-full aspect-video overflow-hidden max-h-62 max-lg:hidden">
         {LAYERS.map((layer, i) => (
           <div key={layer.src} ref={(el) => { layerRefs.current[i] = el }} className="absolute inset-0 will-change-transform">
             <Image src={layer.src} alt={layer.alt} fill draggable={false} className="object-cover" priority />
@@ -94,12 +130,32 @@ const Navbar = () => {
         </div>
       </div>
 
+      <div ref={sentinelRef} className="h-0" />
+
       <div className="bg-neutral-800 border-b-4 border-b-neutral-700 py-2 text-white text-center text-[24px] uppercase flex items-center justify-center gap-12">
         {navLinks.map((link, idx) => (
           <Link href={link.route} key={idx} className={`${pathname === link.route && "text-amber-400"} transition-colors duration-200 hover:text-amber-400`}>
             {link.label}
           </Link>
         ))}
+      </div>
+
+      <div ref={stickyNavRef} className="fixed top-0 left-0 right-0 z-50 bg-neutral-800 border-b-4 border-b-neutral-700 py-2 px-3 sm:px-4 md:px-[20vh] lg:px-[16vh] 2xl:px-[28vh] text-white text-center text-[24px] uppercase flex items-center justify-between gap-12">
+        <Link href={ROUTES.HOME} className="link-icon">
+          <Image src="/icons/icon.png" alt="Mineplex" height={48} width={48} />
+        </Link>
+        
+        <div className="flex items-center gap-12">
+          {navLinks.map((link, idx) => (
+            <Link href={link.route} key={idx} className={`${pathname === link.route && "text-amber-400"} transition-colors duration-200 hover:text-amber-400`}>
+              {link.label}
+            </Link>
+          ))}
+        </div>
+
+        <Link href={ROUTES.PLAY} className="bg-amber-600 border-b-3 border-b-amber-900 py-2 px-8 text-white text-[15px] text-shadow-sm/20 uppercase rounded-t-sm rounded-b-lg transition-colors duration-200 hover:bg-amber-700">
+          Play Now!
+        </Link>
       </div>
     </nav>
   )
