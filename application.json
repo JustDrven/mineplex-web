@@ -1,0 +1,24 @@
+{
+  "backend": [
+    {
+      "name": "MinecraftService",
+      "port": 8080
+    },
+    {
+      "name": "AccountService",
+      "port": 8081
+    },
+    {
+      "name": "ForumService",
+      "port": 8082
+    }
+
+  ],
+
+  "frontend": [
+    {
+      "name": "Website",
+      "port": 3000
+    }
+  ]
+}
