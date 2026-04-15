@@ -6,7 +6,7 @@ export const metadata = {
 
 const Page = () => {
   return (
-    <PageContainer title="Applications" childrenClassName="text-[20px] font-roboto font-light">
+    <PageContainer title="Applications">
       All of the applications are currently closed.
     </PageContainer>
   )

@@ -12,7 +12,7 @@ export const bannersList = [
         }
     },
     {
-        title: "Share your thoughts on the Mineplex forums!",
+        title: "Visit the Mineplex forums!",
         description: "Share your thoughts on any thing on the Mineplex forums. There you can get some feedback from other players.",
         image: "/images/banners/banner-2.png",
         button: {

@@ -47,9 +47,9 @@ const PageBanner = () => {
           <CarouselItem key={idx} className="relative h-[38vh]">
             <Image src={banner.image} alt={banner.title} fill draggable={false} className="w-full h-[38vh] object-cover" />
 
-            <div className="absolute top-20 left-72 space-y-12 inset-0">
+            <div className="absolute inset-y-12 md:inset-y-20 inset-x-16 md:inset-x-26 lg:inset-x-48 xl:inset-x-52 2xl:inset-x-72 space-y-12 flex flex-col justify-center items-start">
               <div>
-                <h1 className="text-white text-[48px] font-bold uppercase drop-shadow-md/80">
+                <h1 className="text-white text-[36px] lg:text-[38px] xl:text-[40px] 2xl:text-[48px] font-bold uppercase drop-shadow-md/80">
                   {banner.title.split(/mineplex/i).map((part, idz, arr) => (
                     <Fragment key={idz}>
                       {part} {
@@ -62,12 +62,12 @@ const PageBanner = () => {
                   ))}
                 </h1>
 
-                <p className="text-white text-[28px] font-light drop-shadow-md/80">
+                <p className="text-white text-[20px] lg:text-[24px] xl:text-[26px] 2xl:text-[28px] font-light drop-shadow-md/80">
                   {banner.description}
                 </p>
               </div>
 
-              <Link href={banner.button.route} target={banner.button.target} className="bg-amber-500 border-b-5 border-b-amber-900 py-2 px-12 text-white text-shadow-sm/20 text-[26px] rounded-t-md rounded-b-xl transition-colors duration-200 hover:bg-amber-600">
+              <Link href={banner.button.route} target={banner.button.target} className="bg-amber-500 border-b-5 border-b-amber-900 py-2 px-12 text-white text-shadow-sm/20 text-[26px] rounded-t-md rounded-b-xl transition-colors duration-200 hover:bg-amber-600 max-md:hidden">
                 {banner.button.label}
               </Link>
             </div>

@@ -8,6 +8,7 @@ import { navLinks } from "@/constants/navLinks"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { ROUTES } from "@/constants/routes"
+import NavbarMobile from "./NavbarMobile"
 
 const LAYERS = [
   { src: "/images/headers/layer-0.png", alt: "layer 0" },
@@ -36,35 +37,46 @@ const Navbar = () => {
     const sentinel = sentinelRef.current
     const stickyNav = stickyNavRef.current
 
+    let isMobile = false
+
     if (!sentinel || !stickyNav) return
 
     gsap.set(stickyNav, { y: "-100%" })
 
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        gsap.killTweensOf(stickyNav)
+    const observer = new IntersectionObserver(([entry]) => {
+      gsap.killTweensOf(stickyNav)
 
-        if (!entry.isIntersecting) {
-          gsap.to(stickyNav, {
-            y: "0%",
-            duration: 0.4,
-            ease: "power3.out"
-          })
-        } else {
-          gsap.to(stickyNav, {
-            y: "-100%",
-            duration: 0.15,
-            ease: "power4.in",
-            overwrite: true
-          })
-        }
-      },
-      { threshold: 0 }
-    )
+      if (!entry.isIntersecting) {
+        gsap.to(stickyNav, {
+          y: "0%",
+          duration: isMobile ? 0 : 0.4,
+          ease: "power3.out"
+        })
+      } else {
+        gsap.to(stickyNav, {
+          y: "-100%",
+          duration: isMobile ? 0 : 0.15,
+          ease: "power4.in",
+          overwrite: true
+        })
+      }
+    },
+    { threshold: 0 }
+  )
 
-    observer.observe(sentinel)
-    return () => observer.disconnect()
-  }, [])
+  const handleResize = () => {
+    isMobile = window.innerWidth <= 768
+  }
+
+  handleResize()
+  window.addEventListener("resize", handleResize)
+  observer.observe(sentinel)
+
+  return () => {
+    window.removeEventListener("resize", handleResize)
+    observer.disconnect()
+  }
+}, [])
 
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
     const rect = containerRef.current?.getBoundingClientRect()
@@ -132,20 +144,12 @@ const Navbar = () => {
 
       <div ref={sentinelRef} className="h-0" />
 
-      <div className="bg-neutral-800 border-b-4 border-b-neutral-700 py-2 text-white text-center text-[24px] uppercase flex items-center justify-center gap-12">
-        {navLinks.map((link, idx) => (
-          <Link href={link.route} key={idx} className={`${pathname === link.route && "text-amber-400"} transition-colors duration-200 hover:text-amber-400`}>
-            {link.label}
-          </Link>
-        ))}
-      </div>
-
-      <div ref={stickyNavRef} className="fixed top-0 left-0 right-0 z-50 bg-neutral-800 border-b-4 border-b-neutral-700 py-2 px-3 sm:px-4 md:px-[20vh] lg:px-[16vh] 2xl:px-[28vh] text-white text-center text-[24px] uppercase flex items-center justify-between gap-12">
-        <Link href={ROUTES.HOME} className="link-icon">
+      <div className="bg-neutral-800 border-b-4 border-b-neutral-700 py-2 px-3 sm:px-4 md:px-[6vh] lg:px-[16vh] 2xl:px-[28vh] text-white text-center text-[24px] uppercase flex items-center justify-between lg:justify-center gap-12">
+        <Link href={ROUTES.HOME} className="link-icon lg:hidden">
           <Image src="/icons/icon.png" alt="Mineplex" height={48} width={48} />
         </Link>
         
-        <div className="flex items-center gap-12">
+        <div className="flex items-center justify-center gap-12 max-md:hidden">
           {navLinks.map((link, idx) => (
             <Link href={link.route} key={idx} className={`${pathname === link.route && "text-amber-400"} transition-colors duration-200 hover:text-amber-400`}>
               {link.label}
@@ -153,9 +157,39 @@ const Navbar = () => {
           ))}
         </div>
 
-        <Link href={ROUTES.PLAY} className="bg-amber-600 border-b-3 border-b-amber-900 py-2 px-8 text-white text-[15px] text-shadow-sm/20 uppercase rounded-t-sm rounded-b-lg transition-colors duration-200 hover:bg-amber-700">
-          Play Now!
+        <div className="flex items-center gap-2 lg:hidden">
+          <div className="md:hidden">
+            <NavbarMobile />
+          </div>
+
+          <Link href={ROUTES.PLAY} className="bg-amber-600 border-b-3 border-b-amber-900 py-2 px-8 text-white text-[15px] text-shadow-sm/20 uppercase rounded-t-sm rounded-b-lg transition-colors duration-200 hover:bg-amber-700">
+            Play Now!
+          </Link>
+        </div>
+      </div>
+
+      <div ref={stickyNavRef} className="fixed top-0 left-0 right-0 z-50 bg-neutral-800 border-b-4 border-b-neutral-700 py-2 px-3 sm:px-4 md:px-[6vh] lg:px-[16vh] 2xl:px-[28vh] text-white text-center text-[24px] uppercase flex items-center justify-between gap-12">
+        <Link href={ROUTES.HOME} className="link-icon">
+          <Image src="/icons/icon.png" alt="Mineplex" height={48} width={48} />
         </Link>
+
+        <div className="flex items-center gap-12 max-md:hidden">
+          {navLinks.map((link, idx) => (
+            <Link href={link.route} key={idx} className={`${pathname === link.route && "text-amber-400"} transition-colors duration-200 hover:text-amber-400`}>
+              {link.label}
+            </Link>
+          ))}
+        </div>
+
+        <div className="flex items-center gap-2">
+          <div className="md:hidden">
+            <NavbarMobile />
+          </div>
+
+          <Link href={ROUTES.PLAY} className="bg-amber-600 border-b-3 border-b-amber-900 py-2 px-8 text-white text-[15px] text-shadow-sm/20 uppercase rounded-t-sm rounded-b-lg transition-colors duration-200 hover:bg-amber-700">
+            Play Now!
+          </Link>
+        </div>
       </div>
     </nav>
   )

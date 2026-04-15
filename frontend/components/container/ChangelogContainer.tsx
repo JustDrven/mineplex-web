@@ -13,7 +13,7 @@ interface Props {
 
 const ChangelogContainer = ({ id, title, description, createdBy, createdAt }: Props) => {
   return (
-    <PageContainer title={title} className="mx-[52vh]!" childrenClassName="space-y-8">
+    <PageContainer title={title} childrenClassName="space-y-8">
       <div className="text-[20px] font-roboto font-light space-y-3">
         {description.map((line, idx) => (
           <p key={idx}>
@@ -36,7 +36,7 @@ const ChangelogContainer = ({ id, title, description, createdBy, createdAt }: Pr
             Posted by <span className="font-normal">{createdBy}</span>
           </h1>
 
-          <Link href={`${ROUTES.CHANGELOG}/${id}`} className="bg-amber-500 border-b-3 border-b-amber-900 py-2 px-8 text-white text-shadow-sm/20 rounded-t-sm rounded-b-lg transition-colors duration-200 hover:bg-amber-600">
+          <Link href={`${ROUTES.CHANGELOG}/${id}`} className="bg-amber-500 border-b-3 border-b-amber-900 py-2 px-8 text-white font-oswald text-shadow-sm/20 rounded-t-sm rounded-b-lg transition-colors duration-200 hover:bg-amber-600">
             View More
           </Link>
         </div>

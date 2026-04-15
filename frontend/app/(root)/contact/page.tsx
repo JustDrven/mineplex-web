@@ -8,7 +8,7 @@ export const metadata = {
 
 const Page = () => {
   return (
-    <PageContainer title="Contact Mineplex" childrenClassName="text-[20px] font-roboto font-light space-y-8">
+    <PageContainer title="Contact Mineplex" childrenClassName="space-y-8">
       {contactList.map((c, idx) => (
         <div className="space-y-2" key={idx}>
           <b className="block font-medium">

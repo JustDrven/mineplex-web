@@ -8,7 +8,7 @@ export const metadata = {
 const Page = () => {
   return (
     <PageContainer title="How to join the Mineplex Network?">
-      <div className="text-[20px] font-roboto font-light space-y-8">
+      <div className="space-y-8">
         <b className="block">
           Hello Mineplexer, below you will find a guide on how to join the Mineplex Network:
         </b>

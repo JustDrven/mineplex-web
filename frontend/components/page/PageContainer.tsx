@@ -9,7 +9,7 @@ interface Props {
 
 const PageContainer = ({ title, className, childrenClassName, children }: Props) => {
   return (
-    <div className={`${className} bg-white py-6 px-9 mt-8 mx-[38vh] rounded-t-md rounded-b-xl drop-shadow-md/20 space-y-8`}>
+    <div className={`${className} bg-white py-6 px-9 mt-8 mx-3 sm:mx-[2vh] md:mx-[12vh] lg:mx-[16vh] xl:mx-[22vh] 2xl:mx-[48vh] rounded-t-md rounded-b-xl drop-shadow-md/20 space-y-8`}>
       {title && (
         <section>
           <h1 className="text-neutral-700 text-[36px] font-black uppercase">
@@ -20,7 +20,7 @@ const PageContainer = ({ title, className, childrenClassName, children }: Props)
         </section>
       )}
 
-      <section className={childrenClassName}>
+      <section className={`${childrenClassName} text-[20px] font-roboto font-light`}>
         {children}
       </section>
     </div>
