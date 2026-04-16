@@ -11,7 +11,9 @@
 
     <modules>
         <module>common</module>
+
         <module>minecraft</module>
+        <module>forum</module>
     </modules>
 
     <properties>
