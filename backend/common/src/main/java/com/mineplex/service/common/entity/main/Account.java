@@ -5,7 +5,11 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "accounts")
@@ -23,12 +27,21 @@ public class Account {
     @Column(nullable = false)
     private String password;
 
+    @ManyToMany
+    private List<Rank> ranks;
+
     public Account() {
     }
 
     public Account(String name, String password) {
         this.name = name;
         this.password = password;
+
+        ranks = new ArrayList<>();
+    }
+
+    public List<Rank> getRanks() {
+        return ranks;
     }
 
     public long getId() {

@@ -1,0 +1,40 @@
+[
+  {
+    "name": "Leadership",
+    "users": [
+      {
+        "name": "Clear",
+        "rank": {
+          "display": "Owner",
+          "priority": 1
+        }
+      },
+      {
+        "name": "Dragonite",
+        "rank": {
+          "display": "Leader",
+          "priority": 2
+        }
+      }
+    ]
+  },
+  {
+    "name": "Development",
+    "users": [
+      {
+        "name": "CookieBilly",
+        "rank": {
+          "display": "Backend Developer",
+          "priority": 1
+        }
+      },
+      {
+        "name": "purple",
+        "rank": {
+          "display": "Service Developer",
+          "priority": 2
+        }
+      }
+    ]
+  }
+]
