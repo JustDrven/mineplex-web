@@ -1,5 +1,5 @@
 export class ColorUtil {
-    static getSocialColor: {[key: string]: string} = {
+    static getSocialColor: { [key: string]: string } = {
         "black": "hover:bg-black",
         "blue-600": "hover:bg-blue-600",
         "blue-500": "hover:bg-blue-500",

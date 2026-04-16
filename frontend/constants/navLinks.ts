@@ -12,5 +12,13 @@ export const navLinks = [
     {
         label: "Games",
         route: ROUTES.GAMES,
+    },
+    {
+        label: "Staff",
+        route: ROUTES.STAFF,
+    },
+    {
+        label: "Contact",
+        route: ROUTES.CONTACT,
     }
 ]

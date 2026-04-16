@@ -1,0 +1,19 @@
+export enum Rank {
+    Owner,
+    Leader,
+    Admin,
+    Developer,
+    Support,
+    ClansManager,
+    CommunityManager,
+    ForumManager,
+    StaffManager,
+    Recruiter,
+    EventSquad,
+    QA,
+    SocialMedia,
+    Mod,
+    Trainee,
+    BuildLead,
+    BuildTeam
+}
