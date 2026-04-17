@@ -31,12 +31,12 @@ const ChangelogContainer = ({ id, title, description, createdBy, createdAt }: Pr
           <div className="bg-linear-to-r from-neutral-200 to-transparent h-1 w-full" />
         </div>
 
-        <div className="flex items-start justify-between">
+        <div className="flex max-sm:flex-col items-start justify-between gap-y-4">
           <h1 className="text-[18px] font-light">
             Posted by <span className="font-normal">{createdBy}</span>
           </h1>
 
-          <Link href={`${ROUTES.CHANGELOG}/${id}`} className="bg-amber-500 border-b-3 border-b-amber-900 py-2 px-8 text-white font-oswald text-shadow-sm/20 rounded-t-sm rounded-b-lg transition-colors duration-200 hover:bg-amber-600">
+          <Link href={`${ROUTES.CHANGELOG}/${id}`} className="bg-amber-500 border-b-3 border-b-amber-900 py-2 px-8 max-sm:w-full text-center text-white font-oswald text-shadow-sm/20 rounded-t-sm rounded-b-lg transition-colors duration-200 hover:bg-amber-600">
             View More
           </Link>
         </div>
