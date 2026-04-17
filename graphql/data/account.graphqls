@@ -1,4 +1,12 @@
 type MineplexAccount {
     id: Int
     name: String
+
+    ranks: [MineplexRank]
+    forums: [MineplexForum]
+}
+
+type MineplexRank {
+    name: String
+    priority: Int
 }

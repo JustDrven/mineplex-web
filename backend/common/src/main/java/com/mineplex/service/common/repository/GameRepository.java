@@ -7,6 +7,7 @@ import com.speedment.jpastreamer.application.JPAStreamer;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 
+import java.util.List;
 import java.util.UUID;
 
 @ApplicationScoped
@@ -20,5 +21,10 @@ public class GameRepository {
                 .filter((game) -> game.getId().equals(id))
                 .findFirst()
                 .orElse(null);
+    }
+
+    public List<Game> findGames() {
+        return streamer.stream(Game.class)
+                .toList();
     }
 }

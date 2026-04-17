@@ -1,0 +1,13 @@
+type OkReplay {
+    error: Boolean,
+    message: String
+}
+
+type MineplexPagedAccounts {
+    page: Int,
+    maxPage: Int
+    perPage: Int
+    size: Int
+
+    results: [MineplexAccount]
+}

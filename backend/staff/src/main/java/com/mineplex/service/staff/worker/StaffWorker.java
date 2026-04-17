@@ -60,7 +60,7 @@ public class StaffWorker {
                 List<RankGroup> rankGroups = account.getRanks().stream().map(Rank::getRank).toList();
                 if (!currentCategory.containsRank(rankGroups)) continue;
 
-                RankGroup primaryRankGroup = rankGroups.getFirst();
+                RankGroup primaryRankGroup = rankGroups.get(0);
                 StaffUser staffUser = new StaffUser(
                         account.getName(),
                         new StaffRank(

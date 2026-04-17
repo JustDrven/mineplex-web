@@ -1,0 +1,10 @@
+type MineplexJwtResponse {
+    token: String!
+
+    detail: MineplexDetail
+}
+
+type MineplexDetail {
+    key: String
+    value: String
+}

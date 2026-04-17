@@ -1,7 +1,7 @@
 package com.mineplex.service.minecraft.service;
 //
 
-import com.mineplex.service.common.data.MineplexPlayersData;
+import com.mineplex.service.common.data.main.MineplexPlayersData;
 import com.mineplex.service.common.util.CacheObject;
 
 import com.google.gson.JsonObject;
@@ -59,7 +59,7 @@ public class PlayersService {
             try (Response response = pool.newCall(httpRequest).execute()) {
 
                 String data = response.body().string();
-                LOGGER.info("Getting response {}", "GET" + BASE_URL);
+                LOGGER.info("Getting response {}", "GET " + BASE_URL);
 
                 JsonObject jsonData = JsonParser.parseString(data).getAsJsonObject();
                 JsonObject players = jsonData.get("players").getAsJsonObject();

@@ -5,7 +5,7 @@ type Query {
     games: [MineplexGame]
     gameById(id: ID!): MineplexGame
 
-    accountByName(name: String!): MineplexAccount
+    accounts(page: Int!, perPage: Int!): [MineplexAccount]
     accountById(id: Int!): MineplexAccount
 
 }

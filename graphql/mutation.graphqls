@@ -1,0 +1,10 @@
+type Mutation {
+
+    createGame(display: String!, environment: String): MineplexGame
+    deleteGame(gameId: ID!): MineplexGame
+
+
+    register(name: String!, password: String!): OkReplay
+    login(name: String!, password: String!): MineplexJwtResponse
+
+}

@@ -1,11 +1,12 @@
 package com.mineplex.service.minecraft.resource;
 
-import com.mineplex.service.common.data.MineplexGame;
-import com.mineplex.service.common.data.MineplexPlayersData;
+import com.mineplex.service.common.data.main.MineplexGame;
+import com.mineplex.service.common.data.main.MineplexPlayersData;
 import com.mineplex.service.minecraft.service.GamesService;
 import com.mineplex.service.minecraft.service.PlayersService;
 
 import org.eclipse.microprofile.graphql.GraphQLApi;
+import org.eclipse.microprofile.graphql.Name;
 import org.eclipse.microprofile.graphql.Query;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -45,8 +46,8 @@ public class MinecraftResource {
     }
 
     @Query("gameById")
-    public MineplexGame getGamesByID(String id) {
-        Optional<MineplexGame> gameOptional = gamesService.getGameByID(UUID.fromString(id));
+    public MineplexGame getGamesByID(@Name("id") UUID id) {
+        Optional<MineplexGame> gameOptional = gamesService.getGameByID(id);
 
         return gameOptional.orElseGet(null);
     }
