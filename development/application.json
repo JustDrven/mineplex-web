@@ -7,6 +7,10 @@
     {
       "name": "ForumService",
       "port": 8081
+    },
+    {
+      "name": "StaffService",
+      "port": 8082
     }
   ],
 

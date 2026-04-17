@@ -14,7 +14,17 @@
 
         <module>minecraft</module>
         <module>forum</module>
+        <module>staff</module>
     </modules>
+
+    <build>
+        <resources>
+            <resource>
+                <directory>resources</directory>
+                <targetPath>.</targetPath>
+            </resource>
+        </resources>
+    </build>
 
     <properties>
         <maven.compiler.source>17</maven.compiler.source>
