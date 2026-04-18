@@ -18,7 +18,7 @@ const LAYERS = [
   { src: "/images/headers/layer-4.png", alt: "layer 4" },
 ]
 
-const MAX_MOVE = 40
+const MAX_MOVE = 60
 
 const copyText = (text: string) => {
   navigator.clipboard.writeText(text)
@@ -83,19 +83,14 @@ const Navbar = () => {
     if (!rect) return
 
     const cx = rect.left + rect.width / 2
-    const cy = rect.top + rect.height / 2
-
     const dx = (e.clientX - cx) / (rect.width / 2)
-    const dy = (e.clientY - cy) / (rect.height / 2)
 
     layerRefs.current.forEach((el, i) => {
       if (!el) return
 
-      const factor = (i / LAYERS.length * 2) * MAX_MOVE
-
       gsap.to(el, {
-        x: dx * factor,
-        y: dy * factor * 0.4 / 10,
+        x: dx * i / (LAYERS.length - 1) * MAX_MOVE,
+        y: 0,
         duration: 0.6,
         ease: "power2.out",
       })
@@ -118,8 +113,14 @@ const Navbar = () => {
     <nav className="relative w-full">
       <div ref={containerRef} onMouseMove={handleMouseMove} onMouseLeave={handleMouseLeave} className="relative w-full aspect-video overflow-hidden max-h-62 max-lg:hidden">
         {LAYERS.map((layer, i) => (
-          <div key={layer.src} ref={(el) => { layerRefs.current[i] = el }} className="absolute inset-0 will-change-transform">
-            <Image src={layer.src} alt={layer.alt} fill draggable={false} className="object-cover" priority />
+          <div key={layer.src} ref={(el) => { layerRefs.current[i] = el }} className="absolute inset-y-0 -inset-x-full will-change-transform">
+            <div className="absolute inset-0 flex">
+              {([-1, 1, -1]).map((scale, idx) => (
+                <div key={idx} className={`${scale === -1 && "-scale-x-100"} relative flex-1`}>
+                  <Image src={layer.src} alt={layer.alt} fill draggable={false} className="object-cover" priority />
+                </div>
+              ))}
+            </div>
           </div>
         ))}
 
