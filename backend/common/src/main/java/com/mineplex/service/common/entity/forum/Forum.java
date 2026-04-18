@@ -32,7 +32,7 @@ public class Forum {
     @ManyToOne
     private Account creator;
 
-    @OneToMany
+    @OneToMany(mappedBy = "forum")
     private List<ForumMessage> messages;
 
     private boolean open;

@@ -1,0 +1,16 @@
+type MineplexForum {
+    id: String
+
+    title: String
+    open: Boolean
+
+    messages: [MineplexForumMessage]
+}
+
+type MineplexForumMessage {
+
+    sentAt: String
+    sender: MineplexAccount
+    content: String
+
+}

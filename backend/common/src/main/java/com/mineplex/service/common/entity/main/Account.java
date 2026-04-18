@@ -6,6 +6,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToMany;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 import java.util.ArrayList;
@@ -27,7 +28,7 @@ public class Account {
     @Column(nullable = false)
     private String password;
 
-    @ManyToMany
+    @OneToMany(mappedBy = "account")
     private List<Rank> ranks;
 
     public Account() {

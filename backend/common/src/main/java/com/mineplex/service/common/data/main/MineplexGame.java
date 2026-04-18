@@ -1,4 +1,4 @@
-package com.mineplex.service.common.data;
+package com.mineplex.service.common.data.main;
 
 public record MineplexGame(String id,
                            String image,
