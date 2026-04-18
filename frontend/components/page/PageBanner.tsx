@@ -67,7 +67,7 @@ const PageBanner = () => {
                 </p>
               </div>
 
-              <Link href={banner.button.route} target={banner.button.target} className="bg-amber-500 border-b-5 border-b-amber-900 py-2 px-12 text-white text-shadow-sm/20 text-[26px] rounded-t-md rounded-b-xl transition-colors duration-200 hover:bg-amber-600 max-md:hidden">
+              <Link href={banner.button.route} target={banner.button.target} className="link-primary border-b-5 px-12 text-[26px] rounded-t-md rounded-b-xl max-md:hidden">
                 {banner.button.label}
               </Link>
             </div>

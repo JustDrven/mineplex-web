@@ -39,7 +39,7 @@ const Footer = () => {
           </ul>
 
           <div className="max-lg:mx-auto max-lg:pt-8 pt-3 flex flex-col gap-3">
-            <Link href={ROUTES.PLAY} className="bg-amber-500 border-b-3 border-b-amber-900 py-3 px-8 text-white text-center text-shadow-sm/20 font-medium rounded-t-sm rounded-b-lg transition-colors duration-200 hover:bg-amber-600">
+            <Link href={ROUTES.PLAY} className="link-primary py-3 text-center text-shadow-sm/20 font-medium">
               Join Mineplex!
             </Link>
 

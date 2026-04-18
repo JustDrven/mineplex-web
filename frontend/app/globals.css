@@ -2,12 +2,20 @@
 @import "tw-animate-css";
 @import "shadcn/tailwind.css";
 
+@utility link-primary {
+  @apply bg-amber-500 border-b-3 border-b-amber-900 py-2 px-8 text-white text-shadow-sm/20 rounded-t-sm rounded-b-lg transition-colors duration-200 hover:bg-amber-600
+}
+
 @utility link-tertiary {
   @apply transition-colors duration-200 hover:text-amber-600;
 }
 
 @utility link-icon {
   @apply transition-all duration-200 hover:scale-105;
+}
+
+@utility navbar {
+  @apply bg-neutral-800 border-b-4 border-b-neutral-700 py-2 px-3 sm:px-4 md:px-[6vh] lg:px-[16vh] 2xl:px-[28vh] text-white text-center text-[24px] uppercase flex items-center justify-between lg:justify-center gap-12;
 }
 
 @theme {
@@ -66,8 +74,8 @@
   --popover-foreground: oklch(0.145 0 0);
   --primary: oklch(0.205 0 0);
   --primary-foreground: oklch(0.985 0 0);
-  --secondary: oklch(0.97 0 0);
-  --secondary-foreground: oklch(0.205 0 0);
+  --secondary: oklch(0.98 0 0);
+  --secondary-foreground: oklch(0.204 0 0);
   --muted: oklch(0.97 0 0);
   --muted-foreground: oklch(0.556 0 0);
   --accent: oklch(0.97 0 0);

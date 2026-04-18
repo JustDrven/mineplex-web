@@ -18,7 +18,7 @@ const LAYERS = [
   { src: "/images/headers/layer-4.png", alt: "layer 4" },
 ]
 
-const MAX_MOVE = 40
+const MAX_MOVE = 60
 
 const copyText = (text: string) => {
   navigator.clipboard.writeText(text)
@@ -83,19 +83,14 @@ const Navbar = () => {
     if (!rect) return
 
     const cx = rect.left + rect.width / 2
-    const cy = rect.top + rect.height / 2
-
     const dx = (e.clientX - cx) / (rect.width / 2)
-    const dy = (e.clientY - cy) / (rect.height / 2)
 
     layerRefs.current.forEach((el, i) => {
       if (!el) return
 
-      const factor = (i / LAYERS.length * 2) * MAX_MOVE
-
       gsap.to(el, {
-        x: dx * factor,
-        y: dy * factor * 0.4 / 10,
+        x: dx * i / (LAYERS.length - 1) * MAX_MOVE,
+        y: 0,
         duration: 0.6,
         ease: "power2.out",
       })
@@ -118,8 +113,14 @@ const Navbar = () => {
     <nav className="relative w-full">
       <div ref={containerRef} onMouseMove={handleMouseMove} onMouseLeave={handleMouseLeave} className="relative w-full aspect-video overflow-hidden max-h-62 max-lg:hidden">
         {LAYERS.map((layer, i) => (
-          <div key={layer.src} ref={(el) => { layerRefs.current[i] = el }} className="absolute inset-0 will-change-transform">
-            <Image src={layer.src} alt={layer.alt} fill draggable={false} className="object-cover" priority />
+          <div key={layer.src} ref={(el) => { layerRefs.current[i] = el }} className="absolute inset-y-0 -inset-x-full will-change-transform">
+            <div className="absolute inset-0 flex">
+              {([-1, 1, -1]).map((scale, idx) => (
+                <div key={idx} className={`${scale === -1 && "-scale-x-100"} relative flex-1`}>
+                  <Image src={layer.src} alt={layer.alt} fill draggable={false} className="object-cover" priority />
+                </div>
+              ))}
+            </div>
           </div>
         ))}
 
@@ -144,7 +145,7 @@ const Navbar = () => {
 
       <div ref={sentinelRef} className="h-0" />
 
-      <div className="bg-neutral-800 border-b-4 border-b-neutral-700 py-2 px-3 sm:px-4 md:px-[6vh] lg:px-[16vh] 2xl:px-[28vh] text-white text-center text-[24px] uppercase flex items-center justify-between lg:justify-center gap-12">
+      <div className="navbar">
         <Link href={ROUTES.HOME} className="link-icon lg:hidden">
           <Image src="/icons/icon.png" alt="Mineplex" height={48} width={48} />
         </Link>
@@ -162,13 +163,13 @@ const Navbar = () => {
             <NavbarMobile />
           </div>
 
-          <Link href={ROUTES.PLAY} className="bg-amber-600 border-b-3 border-b-amber-900 py-2 px-8 text-white text-[15px] text-shadow-sm/20 uppercase rounded-t-sm rounded-b-lg transition-colors duration-200 hover:bg-amber-700">
+          <Link href={ROUTES.PLAY} className="link-primary bg-amber-600 text-[15px] hover:bg-amber-700">
             Play Now!
           </Link>
         </div>
       </div>
 
-      <div ref={stickyNavRef} className="fixed top-0 left-0 right-0 z-50 bg-neutral-800 border-b-4 border-b-neutral-700 py-2 px-3 sm:px-4 md:px-[6vh] lg:px-[16vh] 2xl:px-[28vh] text-white text-center text-[24px] uppercase flex items-center justify-between gap-12">
+      <div ref={stickyNavRef} className="navbar fixed top-0 left-0 right-0 z-50 justify-between">
         <Link href={ROUTES.HOME} className="link-icon">
           <Image src="/icons/icon.png" alt="Mineplex" height={48} width={48} />
         </Link>
@@ -186,7 +187,7 @@ const Navbar = () => {
             <NavbarMobile />
           </div>
 
-          <Link href={ROUTES.PLAY} className="bg-amber-600 border-b-3 border-b-amber-900 py-2 px-8 text-white text-[15px] text-shadow-sm/20 uppercase rounded-t-sm rounded-b-lg transition-colors duration-200 hover:bg-amber-700">
+          <Link href={ROUTES.PLAY} className="link-primary bg-amber-600 text-[15px] hover:bg-amber-700">
             Play Now!
           </Link>
         </div>
