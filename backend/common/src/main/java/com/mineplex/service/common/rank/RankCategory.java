@@ -5,11 +5,11 @@ import java.util.List;
 
 public enum RankCategory {
 
-    LEADER_SHIP("Leader-Ship", List.of(RankGroup.OWNER, RankGroup.LEADER)),
+    LEADER_SHIP("Leader-Ship", List.of(RankGroup.OWNER, RankGroup.LEADER, RankGroup.ADMIN)),
     DEVELOPMENT("Development", List.of(RankGroup.DEVELOPER)),
 
-    MODERATORS("Moderators", List.of(RankGroup.MODERATOR)),
-    BUILDERS("Builders", List.of(RankGroup.BUILDER)),
+    MODERATORS("Moderators", List.of(RankGroup.MOD)),
+    BUILDERS("Builders", List.of(RankGroup.BUILD_LEAD, RankGroup.BUILD_TEAM)),
 
     ;
 
@@ -27,8 +27,8 @@ public enum RankCategory {
         this.rankGroups = rankGroups;
     }
 
-    public boolean containsRank(List<RankGroup> currentRanks) {
-        return currentRanks.stream().anyMatch((rankGroup) -> getRankGroups().contains(rankGroup));
+    public boolean containsRank(RankGroup currentRanks) {
+        return rankGroups.contains(currentRanks);
     }
 
     public List<RankGroup> getRankGroups() {

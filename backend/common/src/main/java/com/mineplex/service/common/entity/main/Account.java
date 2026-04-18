@@ -18,7 +18,7 @@ public class Account {
 
     @Id
     @GeneratedValue(
-            strategy = GenerationType.AUTO
+            strategy = GenerationType.IDENTITY
     )
     private long id;
 

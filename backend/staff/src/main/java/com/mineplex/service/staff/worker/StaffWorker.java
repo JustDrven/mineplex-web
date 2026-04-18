@@ -14,6 +14,8 @@ import com.mineplex.service.staff.dto.StaffUser;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 
+import org.jspecify.annotations.NonNull;
+
 import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
@@ -45,41 +47,56 @@ public class StaffWorker {
         List<Account> accounts = accountRepository.findAll((account) -> {
             List<Rank> ranks = account.getRanks();
             if (ranks == null) return false;
+            if (ranks.isEmpty()) return false;
 
             return ranks.stream().anyMatch(Rank::isAdmin);
         });
 
-        for (RankCategory currentCategory : RankCategory.getValues()) {
 
-            StaffDTO staffDTO = new StaffDTO(
-                    currentCategory.getDisplay(),
-                    new ArrayList<>()
+
+        for (RankCategory currentRankCategory : RankCategory.getValues()) {
+            List<StaffUser> staffUsers = getStaffUsers(
+                    currentRankCategory, accounts
             );
 
-            for (Account account : accounts) {
-                List<RankGroup> rankGroups = account.getRanks().stream().map(Rank::getRank).toList();
-                if (!currentCategory.containsRank(rankGroups)) continue;
+            if (staffUsers.isEmpty()) continue;
 
-                RankGroup primaryRankGroup = rankGroups.get(0);
-                StaffUser staffUser = new StaffUser(
-                        account.getName(),
-                        new StaffRank(
-                                primaryRankGroup.getDisplay(),
-                                calculatePriority(primaryRankGroup)
-                        )
-                );
-
-                staffDTO.users().add(staffUser);
-
-            }
-
-
-            toReturn.add(staffDTO);
-
+            toReturn.add(new StaffDTO(currentRankCategory.getDisplay(), staffUsers));
         }
 
         return toReturn;
+    }
 
+    private @NonNull List<StaffUser> getStaffUsers(RankCategory currentRankCategory, List<Account> accounts) {
+        List<StaffUser> staffUsers = new ArrayList<>();
+
+        for (Account account : accounts) {
+            List<Rank> ranks = account.getRanks();
+            RankGroup foundedRank = null;
+
+            for (Rank rank : ranks) {
+
+                RankGroup currentRankGroup = rank.getRank();
+                if (!currentRankCategory.containsRank(currentRankGroup)) continue;
+
+                foundedRank = currentRankGroup;
+                break;
+            }
+
+            if (foundedRank == null) continue;
+
+            staffUsers.add(new StaffUser(
+                    account.getName(),
+
+                    new StaffRank(
+                            foundedRank.getDisplay(), calculatePriority(foundedRank)
+                    )
+            ));
+
+        }
+
+
+        return staffUsers;
     }
 
     private int calculatePriority(RankGroup rank) {

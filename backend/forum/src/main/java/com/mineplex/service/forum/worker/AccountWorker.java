@@ -11,26 +11,40 @@ import com.mineplex.service.common.data.main.MineplexRank;
 import com.mineplex.service.common.data.response.MineplexPagedAccounts;
 import com.mineplex.service.common.data.response.OkReplay;
 import com.mineplex.service.common.entity.main.Account;
+import com.mineplex.service.common.entity.main.Rank;
 import com.mineplex.service.common.rank.RankGroup;
 import com.mineplex.service.common.repository.AccountRepository;
+
+import com.mineplex.service.common.repository.RankRepository;
+
+import com.mineplex.service.common.worker.JwtWorker;
+import com.mineplex.service.common.worker.PasswordWorker;
 
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
 
-import java.nio.charset.StandardCharsets;
 import java.time.Duration;
-import java.util.Base64;
+import java.time.Instant;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
+import java.util.concurrent.TimeUnit;
 
 @ApplicationScoped
 public class AccountWorker {
 
     @Inject
     private AccountRepository accountRepository;
+    @Inject
+    private RankRepository rankRepository;
 
-    private Cache<Long, Account> accountCache;
+    private final Cache<Long, Account> accountCache;
+
+    @Inject
+    private PasswordWorker passwordWorker;
+    @Inject
+    private JwtWorker jwtWorker;
 
     public AccountWorker() {
         accountCache = Caffeine.newBuilder()
@@ -41,10 +55,11 @@ public class AccountWorker {
 
     public OkReplay register(String name, String password) {
         try {
-            String hashPassword = hashPassword(password);
-            Account account = new Account(name, hashPassword);
+            Account account = new Account(name, hashPassword(password));
+            Rank accountRank = new Rank(account, RankGroup.PLAYER);
 
             accountRepository.save(account);
+            rankRepository.save(accountRank);
 
             return new OkReplay(
                     true,
@@ -60,16 +75,12 @@ public class AccountWorker {
     }
 
     public Account getAccount(long id) {
-        Account response = accountCache.getIfPresent(id);
-        if (response != null) return response;
+        return accountCache.get(id, (accountId) -> {
+            Optional<Account> accountOptional = accountRepository.findById(accountId);
+            if (accountOptional.isEmpty()) throw new RuntimeException("The account doesn't exist");
 
-        Optional<Account> accountOptional = accountRepository.findById(id);
-        if (accountOptional.isEmpty()) return null;
-
-        response = accountOptional.get();
-        accountCache.put(id, response);
-
-        return response;
+            return accountOptional.get();
+        });
 
     }
 
@@ -103,12 +114,12 @@ public class AccountWorker {
         );
     }
 
-    private boolean arePasswordSame(String password, String hashPassword) {
-        return false;
+    private boolean isPasswordSame(String password, String hashPassword) {
+        return passwordWorker.verify(hashPassword, password);
     }
 
     private String hashPassword(String password) {
-        return Base64.getEncoder().encodeToString(password.getBytes(StandardCharsets.UTF_8));
+        return passwordWorker.hash(password);
     }
 
     public MineplexJwtResponse login(String name, String password) {
@@ -116,7 +127,7 @@ public class AccountWorker {
         if (accountOptional.isEmpty()) return new MineplexJwtResponse(null, new MineplexDetail("error", "The account doesn't exist!"));
 
         Account account = accountOptional.get();
-        if (!arePasswordSame(password, account.getPassword())) return new MineplexJwtResponse(null, new MineplexDetail("error", "Passwords aren't some!"));
+        if (!isPasswordSame(password, account.getPassword())) return new MineplexJwtResponse(null, new MineplexDetail("error", "Passwords aren't some!"));
 
         String token = generateToken(account);
         return new MineplexJwtResponse(
@@ -126,6 +137,13 @@ public class AccountWorker {
     }
 
     private String generateToken(Account account) {
-        return "";
+        return jwtWorker.encode((builder) -> {
+
+            builder.withClaim("accountId", account.getId());
+            builder.withExpiresAt(Instant.now().plusSeconds(
+                    TimeUnit.HOURS.toSeconds(20L))
+            );
+
+        });
     }
 }

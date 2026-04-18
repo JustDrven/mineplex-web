@@ -7,12 +7,22 @@ public enum RankGroup {
 
     OWNER("Owner"),
     LEADER("Leader"),
+    ADMIN("Admin"),
     DEVELOPER("Developer"),
+    SUPPORT("Support"),
+    CLANS_MANAGER("ClansManager"),
+    COMMUNITY_MANAGER("CommunityManager"),
+    FORUM_MANAGER("ForumManager"),
+    STAFF_MANAGER("StaffManager"),
+    RECRUITER("Recruiter"),
+    EVENT_SQUAD("EventSquad"),
+    QA("QA"),
+    SOCIAL_MEDIA("SocialMedia"),
+    MOD("Mod"),
+    TRAINEE("Trainee"),
+    BUILD_LEAD("BuildLead"),
+    BUILD_TEAM("BuildTeam"),
 
-    MODERATOR("Moderator"),
-    BUILDER("Builder"),
-
-    VIP("VIP", false),
     PLAYER("Player", false)
 
     ;
