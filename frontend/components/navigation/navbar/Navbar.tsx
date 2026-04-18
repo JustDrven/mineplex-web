@@ -144,7 +144,7 @@ const Navbar = () => {
 
       <div ref={sentinelRef} className="h-0" />
 
-      <div className="bg-neutral-800 border-b-4 border-b-neutral-700 py-2 px-3 sm:px-4 md:px-[6vh] lg:px-[16vh] 2xl:px-[28vh] text-white text-center text-[24px] uppercase flex items-center justify-between lg:justify-center gap-12">
+      <div className="navbar">
         <Link href={ROUTES.HOME} className="link-icon lg:hidden">
           <Image src="/icons/icon.png" alt="Mineplex" height={48} width={48} />
         </Link>
@@ -162,13 +162,13 @@ const Navbar = () => {
             <NavbarMobile />
           </div>
 
-          <Link href={ROUTES.PLAY} className="bg-amber-600 border-b-3 border-b-amber-900 py-2 px-8 text-white text-[15px] text-shadow-sm/20 uppercase rounded-t-sm rounded-b-lg transition-colors duration-200 hover:bg-amber-700">
+          <Link href={ROUTES.PLAY} className="link-primary bg-amber-600 text-[15px] hover:bg-amber-700">
             Play Now!
           </Link>
         </div>
       </div>
 
-      <div ref={stickyNavRef} className="fixed top-0 left-0 right-0 z-50 bg-neutral-800 border-b-4 border-b-neutral-700 py-2 px-3 sm:px-4 md:px-[6vh] lg:px-[16vh] 2xl:px-[28vh] text-white text-center text-[24px] uppercase flex items-center justify-between gap-12">
+      <div ref={stickyNavRef} className="navbar fixed top-0 left-0 right-0 z-50 justify-between">
         <Link href={ROUTES.HOME} className="link-icon">
           <Image src="/icons/icon.png" alt="Mineplex" height={48} width={48} />
         </Link>
@@ -186,7 +186,7 @@ const Navbar = () => {
             <NavbarMobile />
           </div>
 
-          <Link href={ROUTES.PLAY} className="bg-amber-600 border-b-3 border-b-amber-900 py-2 px-8 text-white text-[15px] text-shadow-sm/20 uppercase rounded-t-sm rounded-b-lg transition-colors duration-200 hover:bg-amber-700">
+          <Link href={ROUTES.PLAY} className="link-primary bg-amber-600 text-[15px] hover:bg-amber-700">
             Play Now!
           </Link>
         </div>

@@ -36,7 +36,7 @@ const ChangelogContainer = ({ id, title, description, createdBy, createdAt }: Pr
             Posted by <span className="font-normal">{createdBy}</span>
           </h1>
 
-          <Link href={`${ROUTES.CHANGELOG}/${id}`} className="bg-amber-500 border-b-3 border-b-amber-900 py-2 px-8 max-sm:w-full text-center text-white font-oswald text-shadow-sm/20 rounded-t-sm rounded-b-lg transition-colors duration-200 hover:bg-amber-600">
+          <Link href={`${ROUTES.CHANGELOG}/${id}`} className="link-primary max-sm:w-full text-center font-oswald">
             View More
           </Link>
         </div>
