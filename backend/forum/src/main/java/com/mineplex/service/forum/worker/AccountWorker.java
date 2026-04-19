@@ -1,9 +1,5 @@
 package com.mineplex.service.forum.worker;
 
-import com.github.benmanes.caffeine.cache.Cache;
-
-import com.github.benmanes.caffeine.cache.Caffeine;
-
 import com.mineplex.service.common.data.main.MineplexAccount;
 import com.mineplex.service.common.data.main.MineplexDetail;
 import com.mineplex.service.common.data.main.MineplexJwtResponse;
@@ -14,11 +10,12 @@ import com.mineplex.service.common.entity.main.Account;
 import com.mineplex.service.common.entity.main.Rank;
 import com.mineplex.service.common.rank.RankGroup;
 import com.mineplex.service.common.repository.AccountRepository;
-
 import com.mineplex.service.common.repository.RankRepository;
-
 import com.mineplex.service.common.worker.JwtWorker;
 import com.mineplex.service.common.worker.PasswordWorker;
+
+import com.github.benmanes.caffeine.cache.Cache;
+import com.github.benmanes.caffeine.cache.Caffeine;
 
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
@@ -26,7 +23,6 @@ import jakarta.transaction.Transactional;
 
 import java.time.Duration;
 import java.time.Instant;
-import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import java.util.concurrent.TimeUnit;
@@ -34,13 +30,11 @@ import java.util.concurrent.TimeUnit;
 @ApplicationScoped
 public class AccountWorker {
 
+    private final Cache<Long, Account> accountCache;
     @Inject
     private AccountRepository accountRepository;
     @Inject
     private RankRepository rankRepository;
-
-    private final Cache<Long, Account> accountCache;
-
     @Inject
     private PasswordWorker passwordWorker;
     @Inject
@@ -124,10 +118,12 @@ public class AccountWorker {
 
     public MineplexJwtResponse login(String name, String password) {
         Optional<Account> accountOptional = accountRepository.findByName(name);
-        if (accountOptional.isEmpty()) return new MineplexJwtResponse(null, new MineplexDetail("error", "The account doesn't exist!"));
+        if (accountOptional.isEmpty())
+            return new MineplexJwtResponse(null, new MineplexDetail("error", "The account doesn't exist!"));
 
         Account account = accountOptional.get();
-        if (!isPasswordSame(password, account.getPassword())) return new MineplexJwtResponse(null, new MineplexDetail("error", "Passwords aren't some!"));
+        if (!isPasswordSame(password, account.getPassword()))
+            return new MineplexJwtResponse(null, new MineplexDetail("error", "Passwords aren't some!"));
 
         String token = generateToken(account);
         return new MineplexJwtResponse(

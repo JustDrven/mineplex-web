@@ -14,3 +14,8 @@ type MineplexForumMessage {
     content: String
 
 }
+
+type MineplexForumUser {
+    id: Int
+    name: String
+}

@@ -7,9 +7,7 @@ public enum Environment {
 
     RELEASED,
     CLOSED,
-    IN_DEVELOPMENT
-
-    ;
+    IN_DEVELOPMENT;
 
     private static final EnumSet<Environment> VALUES = EnumSet.allOf(Environment.class);
 

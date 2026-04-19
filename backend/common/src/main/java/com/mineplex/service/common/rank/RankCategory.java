@@ -14,17 +14,16 @@ public enum RankCategory {
     ;
 
     private static final EnumSet<RankCategory> VALUES = EnumSet.allOf(RankCategory.class);
-
-    public static EnumSet<RankCategory> getValues() {
-        return VALUES;
-    }
-
     private final String display;
     private final List<RankGroup> rankGroups;
 
     RankCategory(String display, List<RankGroup> rankGroups) {
         this.display = display;
         this.rankGroups = rankGroups;
+    }
+
+    public static EnumSet<RankCategory> getValues() {
+        return VALUES;
     }
 
     public boolean containsRank(RankGroup currentRanks) {

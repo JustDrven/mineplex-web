@@ -3,6 +3,8 @@ type Mutation {
     createGame(display: String!, environment: String): MineplexGame
     deleteGame(gameId: ID!): MineplexGame
 
+    createForum(title: String!, token: String!): MineplexForum
+    deleteForum(id: String!, token: String!): MineplexForum
 
     register(name: String!, password: String!): OkReplay
     login(name: String!, password: String!): MineplexJwtResponse

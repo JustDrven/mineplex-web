@@ -23,10 +23,9 @@ public enum RankGroup {
     BUILD_LEAD("BuildLead"),
     BUILD_TEAM("BuildTeam"),
 
-    PLAYER("Player", false)
+    PLAYER("Player", false);
 
-    ;
-
+    private static final EnumSet<RankGroup> VALUES = EnumSet.allOf(RankGroup.class);
     private final String display;
     private final boolean admin;
 
@@ -39,16 +38,14 @@ public enum RankGroup {
         this(display, true);
     }
 
-    public boolean isAdmin() {
-        return admin;
-    }
-
-    private static final EnumSet<RankGroup> VALUES = EnumSet.allOf(RankGroup.class);
-
     public static Optional<RankGroup> find(String name) {
         return VALUES.stream()
                 .filter((rankGroup) -> rankGroup.name().equalsIgnoreCase(name))
                 .findFirst();
+    }
+
+    public boolean isAdmin() {
+        return admin;
     }
 
     public String getDisplay() {

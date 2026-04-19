@@ -8,4 +8,9 @@ type Query {
     accounts(page: Int!, perPage: Int!): [MineplexAccount]
     accountById(id: Int!): MineplexAccount
 
+    forums(page: Int!, perPage: Int!): [MineplexForum]
+    forumsByCreator(creatorId: Int!): [MineplexForum]
+    forumById(id: String!): MineplexForum
+
+
 }

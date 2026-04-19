@@ -7,14 +7,13 @@ import com.mineplex.service.common.rank.RankGroup;
 import com.mineplex.service.common.repository.AccountRepository;
 import com.mineplex.service.common.util.CacheObject;
 import com.mineplex.service.staff.dto.StaffDTO;
-
 import com.mineplex.service.staff.dto.StaffRank;
 import com.mineplex.service.staff.dto.StaffUser;
 
+import org.jspecify.annotations.NonNull;
+
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
-
-import org.jspecify.annotations.NonNull;
 
 import java.time.Duration;
 import java.util.ArrayList;
@@ -51,7 +50,6 @@ public class StaffWorker {
 
             return ranks.stream().anyMatch(Rank::isAdmin);
         });
-
 
 
         for (RankCategory currentRankCategory : RankCategory.getValues()) {

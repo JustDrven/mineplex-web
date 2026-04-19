@@ -5,11 +5,11 @@ import com.mineplex.service.common.entity.main.game.Environment;
 import com.mineplex.service.common.entity.main.game.Game;
 import com.mineplex.service.minecraft.service.GamesService;
 
-import jakarta.inject.Inject;
-
 import org.eclipse.microprofile.graphql.GraphQLApi;
 import org.eclipse.microprofile.graphql.Mutation;
 import org.eclipse.microprofile.graphql.Name;
+
+import jakarta.inject.Inject;
 
 @GraphQLApi
 public class GameResource {

@@ -8,14 +8,12 @@ import com.mineplex.service.common.repository.GameRepository;
 import com.github.benmanes.caffeine.cache.Cache;
 import com.github.benmanes.caffeine.cache.Caffeine;
 
-import jakarta.persistence.EntityManager;
-
-import jakarta.transaction.Transactional;
-
 import org.jetbrains.annotations.Nullable;
 
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
+import jakarta.persistence.EntityManager;
+import jakarta.transaction.Transactional;
 
 import java.time.Duration;
 import java.util.Collection;

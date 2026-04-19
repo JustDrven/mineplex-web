@@ -1,7 +1,6 @@
 package com.mineplex.service.common.repository;
 
 import com.mineplex.service.common.entity.main.Account;
-
 import com.mineplex.service.common.entity.main.Rank;
 
 import com.speedment.jpastreamer.application.JPAStreamer;

@@ -1,7 +1,6 @@
 package com.mineplex.service.staff.resource;
 
 import com.mineplex.service.staff.dto.StaffDTO;
-
 import com.mineplex.service.staff.worker.StaffWorker;
 
 import jakarta.inject.Inject;

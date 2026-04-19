@@ -6,12 +6,11 @@ import com.mineplex.service.common.data.response.OkReplay;
 import com.mineplex.service.forum.worker.AccountWorker;
 
 import org.eclipse.microprofile.graphql.GraphQLApi;
-
-import jakarta.inject.Inject;
-
 import org.eclipse.microprofile.graphql.Mutation;
 import org.eclipse.microprofile.graphql.Name;
 import org.eclipse.microprofile.graphql.Query;
+
+import jakarta.inject.Inject;
 
 @GraphQLApi
 public class AccountResource {
