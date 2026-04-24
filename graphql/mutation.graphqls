@@ -4,7 +4,7 @@ type Mutation {
     deleteGame(gameId: ID!): MineplexGame
 
     createForum(title: String!, token: String!): MineplexForum
-    deleteForum(id: String!, token: String!): MineplexForum
+    deleteForum(id: String!, token: String!): OkReplay
 
     register(name: String!, password: String!): OkReplay
     login(name: String!, password: String!): MineplexJwtResponse

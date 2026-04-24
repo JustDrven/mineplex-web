@@ -12,5 +12,7 @@ type Query {
     forumsByCreator(creatorId: Int!): [MineplexForum]
     forumById(id: String!): MineplexForum
 
+    sendForumMessage(token: String!, forumId: ID!, content: String!): OkReplay
+
 
 }
