@@ -68,13 +68,13 @@ public class AccountWorker {
 
     }
 
-    public Account getAccount(long id) {
-        return accountCache.get(id, (accountId) -> {
+    public Optional<Account> getAccount(long id) {
+        return Optional.ofNullable(accountCache.get(id, (accountId) -> {
             Optional<Account> accountOptional = accountRepository.findById(accountId);
             if (accountOptional.isEmpty()) throw new RuntimeException("The account doesn't exist");
 
             return accountOptional.get();
-        });
+        }));
 
     }
 
