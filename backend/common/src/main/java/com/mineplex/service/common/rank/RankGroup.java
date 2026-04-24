@@ -1,6 +1,10 @@
 package com.mineplex.service.common.rank;
 
+import com.mineplex.service.common.entity.main.Account;
+import com.mineplex.service.common.entity.main.Rank;
+
 import java.util.EnumSet;
+import java.util.List;
 import java.util.Optional;
 
 public enum RankGroup {
@@ -42,6 +46,32 @@ public enum RankGroup {
         return VALUES.stream()
                 .filter((rankGroup) -> rankGroup.name().equalsIgnoreCase(name))
                 .findFirst();
+    }
+
+    public static boolean has(List<RankGroup> rankGroups, RankGroup... wantedRankGroups) {
+        return rankGroups.stream().anyMatch((currentRankGroup) -> {
+            boolean found = false;
+
+            for (RankGroup wantedRankGroup : wantedRankGroups) {
+                if (!currentRankGroup.equals(wantedRankGroup)) continue;
+
+                found = true;
+                break;
+            }
+
+            return found;
+        });
+    }
+
+    public static boolean has(Account account, RankGroup... wantedRankGroups) {
+        List<Rank> accountRanks = account.getRanks();
+        if (accountRanks == null || accountRanks.isEmpty()) return false;
+
+        List<RankGroup> accountRankGroups = accountRanks.stream()
+                .map(Rank::getRank)
+                .toList();
+
+        return has(accountRankGroups, wantedRankGroups);
     }
 
     public boolean isAdmin() {
