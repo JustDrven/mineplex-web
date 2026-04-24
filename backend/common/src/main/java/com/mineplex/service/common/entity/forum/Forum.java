@@ -2,6 +2,7 @@ package com.mineplex.service.common.entity.forum;
 
 import com.mineplex.service.common.entity.main.Account;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -32,12 +33,20 @@ public class Forum {
     @ManyToOne
     private Account creator;
 
-    @OneToMany(mappedBy = "forum")
+    @OneToMany(
+            mappedBy = "forum",
+            cascade = CascadeType.ALL,
+            orphanRemoval = true
+    )
     private List<ForumMessage> messages;
 
     private boolean open;
 
     private Date createdAt;
+
+
+    public Forum() {
+    }
 
     public Forum(String title, Account creator) {
         this.title = title;
@@ -46,6 +55,10 @@ public class Forum {
         messages = new ArrayList<>();
         open = true;
         createdAt = new Date();
+    }
+
+    public void addMessage(ForumMessage forumMessage) {
+        messages.add(forumMessage);
     }
 
     public UUID getId() {
