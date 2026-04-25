@@ -1,0 +1,16 @@
+query GetForums($page: Int!, $perPage: Int!) {
+
+    forums(page: $page, perPage: $perPage) {
+        id
+        title
+        messages {
+            content
+            sentAt
+            sender {
+                id
+                name
+            }
+        }
+    }
+
+}

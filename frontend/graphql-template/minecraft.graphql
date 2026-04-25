@@ -1,0 +1,27 @@
+query LoadBasicInforamtion {
+
+    games {
+        image
+        name
+    }
+
+    players {
+        max
+        online
+    }
+
+}
+
+query GetGame($gameId: ID!) {
+
+    gameById(id: $gameId) {
+        image
+        name
+    }
+
+    players {
+        max
+        online
+    }
+
+}
