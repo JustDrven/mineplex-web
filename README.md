@@ -32,6 +32,10 @@ The project started as for fun project & is separate on two parts `backend` & `f
 **Contact Page** - Frontend
 
 
+### To-Do
+- Apply forum microservice to frontend
+- Apply minecraft microservice to frontend
+
 -----
 
 Copyright &copy; 2026 | [Authors](./AUTHORS)
