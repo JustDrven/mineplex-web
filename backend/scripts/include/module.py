@@ -1,0 +1,6 @@
+modules = [
+    "minecraft",
+    "staff",
+    "forum",
+]
+

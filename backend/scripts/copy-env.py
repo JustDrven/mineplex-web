@@ -1,29 +1,24 @@
 import os as finder
 import shutil as file_util
 
-def log(message: str):
-    print("[Mineplex Script] " + message)
-
+import include.module as module_system
+import include.logger as logger
 
 tempEnvFile = "resources/.env"
-modules = [
-    "minecraft",
-    "staff",
-    "forum",
-]
 
-log("Trying to manage project modules..")
-for module in modules:
-    log("Managing " + module + "!")
+
+logger.log("Trying to manage project modules..")
+for module in module_system.modules:
+    logger.log("Managing " + module + "!")
 
     envFile = module + "/.env"
 
     if finder.path.exists(envFile):
-        log("Refreshing environment file for '" + module + "'")
+        logger.log("Refreshing environment file for '" + module + "'")
         finder.remove(envFile)
         
     file_util.copyfile(tempEnvFile, envFile, follow_symlinks=True)
-    log("Successfully copied environment file for '" + module + "'")
+    logger.log("Successfully copied environment file for '" + module + "'")
 
 
-log("Copying is complate!")
+logger.log("Copying is complate!")
