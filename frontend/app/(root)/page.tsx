@@ -7,16 +7,11 @@ import { useEffect } from "react";
 import {LoadBasicInforamtionDocument} from "@/graphql-api/types"
 
 export default function Home() {
-
   useEffect(() => {
-
     getMinecraftService().query({query: LoadBasicInforamtionDocument}).then((data) => {
       const playersData = data.data?.players;
-
       console.log(playersData?.online + "/" +playersData?.max);
-      
     })
-
   })
 
   return (
