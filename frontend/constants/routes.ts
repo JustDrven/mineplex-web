@@ -7,5 +7,8 @@ export const ROUTES = {
     APPLICATIONS: "/applications",
     CHANGELOG: "/changelog",
     STAFF: "/staff",
-    CONTACT: "/contact"
+    CONTACT: "/contact",
+
+    SIGN_IN: "/sign-in",
+    SIGN_UP: "/sign-up"
 }
