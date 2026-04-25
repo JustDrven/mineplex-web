@@ -19,7 +19,7 @@ const loadStaff = async (): Promise<StaffCategory[]> => {
     const response = await fetch(STAFF_URL);
 
     if (!response.ok) {
-        throw new Error(`Failed to load staff: ${response.status} ${response.statusText}`);
+        return [];
     }
 
     const result = await response.json();
