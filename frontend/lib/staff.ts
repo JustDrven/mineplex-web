@@ -25,3 +25,6 @@ const loadStaff = async (): Promise<StaffCategory[]> => {
     const result = await response.json();
     return result as StaffCategory[];
 }
+
+export type { StaffCategory, StaffUser, StaffUserRank };
+export { loadStaff };
