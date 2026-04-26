@@ -10,7 +10,6 @@ Mineplex Website.
 - Next.js 16
 - TailwindCSS 4
 - ShadCN UI
-- Axios
 
 ### Authors
 
